@@ -7,11 +7,22 @@ webrick:
     Access-Control-Allow-Origin: "*"
 
 # Theme settings
-site_author: Carlos Pereira Atencio
-repo_url: 'https://github.com/dieterich-lab/LINDAPlus'
+site_author: Enio Oleg Gjerga
+repo_url: 'https://github.com/enio23/lindaplus-docs/'
 edit_on_github: true
 github_docs_folder: false
 sticky_navigation: true
 prev_next_buttons_location: both
 search_enabled: true
 hljs_style: github-gist
+
+# Navigation settings
+nav:
+  - title: "Main"
+    items:
+      - title: "Install"
+        url: /docs/main-pages/
+      - title: "Requirements"
+        url: /docs/main-pages/
+      - title: "Reference"
+        url: /docs/main-pages/
