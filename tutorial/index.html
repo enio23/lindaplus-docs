@@ -50,8 +50,6 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Tutorials</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#inputs">Inputs</a>
-    </li>
     </ul>
                 </li>
               </ul>
@@ -89,25 +87,6 @@
               
                 <h1 id="tutorials">Tutorials</h1>
 <p>Here are provided tutorials about how to use LINDA+ R-package in it's basic form as well as all of it's implemented features. We start by first describing the inputs that are to be given for a LINDA+ analysis, followed by tutorial examples of each feature on a small Toy example to then follow with a real-case application.</p>
-<h2 id="inputs">Inputs</h2>
-<p>The main function in LINDA+ that is used to perform the network inference analysis is <code>runLINDAPlus()</code> and which can take the following inputs:</p>
-<ul>
-<li><strong>Mandatory Inputs:</strong></li>
-<li><code>background.networks.list</code>: The list consists of two elements: <strong>a)</strong> <em>background.networks</em>: This should be a named (cell-types) list containing data-frames joint PPI-DDI's for each cell-type. Each data-frame represents the set of interaction knowledge for each cell-type and it should contain at least 4 columns with the following ID's: 'pfam_source', 'pfam_target', gene_source' and 'gene_target'. In the case where we have no name for a specific domain or where this is not applicable, please set the corresponding values in the 'pfam_source' or 'pfam_target' as NA's (for more details, see in the examples); and <strong>b)</strong> <em>ligand.receptors</em>: This also should be a named list ('ligands' and 'receptors') which contains character vectors where the set of elements that corresponds to Ligands and Receptors have been defined as such.</li>
-<li><code>tf.scores</code>: This information should be provided as a named list (for each cell-type) and which contains data-frames indicating the enrichment scores for each TF at each cell-type. The data-frames should contain at least two columns: 'tf' (indicating the TF ID) and the numerical 'score' (indicating the enrichment scores for each TF).</li>
-</ul>
-<div style="margin-top: 10px;"></div>
-
-<ul>
-<li><strong>Optional Inputs:</strong></li>
-<li><code>lr.scores</code>: This information can be provided as a named list (for each cell-type) and which contains data-frames indicating scores that can be assigned to each ligand-receptor interactions targeting a specific cell. The scores should be provided from 0 to 1. The higher the score assigned to a ligand-receptor interaction, the more likely it is for it to be present in the network solution, while in the case of a score of 0, this will force LINDA+ to not include such an interaction in the solution for a specific indicated cell-type.</li>
-<li><code>ligand.scores</code>: A data-frame object which should contain two columns: 'ligands' (providing the ligand ID's) and 'score' (providing the score associated to each ligand, i.e. abundance). The scores should be provided between 0 and 1 and the higher the score of the ligand, the more likely it will be for a ligand to appear in the solution. A score of 0, means that this ligand will not be able to perturb any receptor of any cell-type.</li>
-<li><code>ccc.scores</code>: A data-frame object which should contain two columns: 'ccc' (providing pairs of interacting cell-types, i.e. "CellA=CellB" for the case when <em>CellA</em> communicates with <em>CellB</em>) and 'score' (providing the score associated to each communicating cell pair). The scores should be provided between 0 and 1 and the higher the score a cell-cell interaction, the more likely it will be for the source cell-type to communicate to the target cell-type. A score of 0, means that the defined source cell-type will not talk to the defined target cell-type.</li>
-<li><code>as.input</code>: A data-frame object which should contain four columns: 'cell_type' (defining the cell-type in which the splicing effect is happening), 'proteinID' (defining the name of the protein affected by splicing), 'domainID' (defining the PFAM identifier of the protein domain that has been affected by splicing) and 'effect' (defining the type of effect that the alternative splicing has on this specific domain: either <em>exclusion</em> or <em>inclusion</em>). In the case of <em>exclusion</em> effect, the corresponding domain will be conidered as skipped and not involved in any of the domain interactions. In the case of <em>inclusion</em>, the defined domain will be present in the solution as an interactor.</li>
-<li><code>solverPath</code>: Here is provided the location path to the desired solver. By default, the path to the cplex solver is set to: <code>solverPath = "/usr/bin/cplex"</code>.</li>
-<li><code>top.tf</code>: A named numerical vector defining how many TF's should be considered as significantly enriched for each of the tables provided in the <em>tf.scores</em> input. The names of the elements in the vector should correspond to the desired cell-types. By default, <code>top.tf = NULL</code>, in which case all the TF's given in the <em>tf.scores</em> list across each cell-type willbe considered as significantly enriched.</li>
-<li><code>lambda1</code>:</li>
-</ul>
               
             </div>
           </div><footer>
