@@ -8,4 +8,8 @@ nav:
 theme: readthedocs
 
 docs_dir: docs
-site_dir: site
+site_dir: '_site_mkdocs/'
+repo_url: 'https://github.com/enio23/lindaplus-docs'
+repo_name: 'GitHub'
+prev_next_buttons_location: 'both'
+copyright: 'Enio Oleg Gjerga'
