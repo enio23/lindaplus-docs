@@ -50,6 +50,24 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Tutorials</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#toy-example">Toy Example</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#linda-basic-mode-analysis">LINDA+ basic mode analysis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#linda-with-ligand-scores-analysis">LINDA+ with ligand scores analysis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#linda-with-ligand-receptor-scores-analysis">LINDA+ with ligand-receptor scores analysis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#linda-with-cell-cell-communication-scores-analysis">LINDA+ with cell-cell communication scores analysis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#linda-with-alternative-splicing-effects">LINDA+ with alternative splicing effects</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#linda-with-perturbation-effects">LINDA+ with perturbation effects</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#real-case-application">Real-case application</a>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -87,6 +105,166 @@
               
                 <h1 id="tutorials">Tutorials</h1>
 <p>Here are provided tutorials about how to use LINDA+ R-package in it's basic form as well as all of it's implemented features. We start by first describing the inputs that are to be given for a LINDA+ analysis, followed by tutorial examples of each feature on a small Toy example to then follow with a real-case application.</p>
+<h2 id="toy-example">Toy Example</h2>
+<p>Below are provided the steps of running a small Toy test study which we have depicted in <strong>Figure 2</strong>. In this Toy case-study we are depicting a system of 3 different cell-types (<em>CellA</em>, <em>CellB</em> and <em>CellC</em>) where each node represents a protein (domains not depicted) while edges represent interactions between nodes. Red rhombus represent cell-receptors, blue circles represent intra-cellular proteins, gray squares represent TF’s, while in black circles we are depicting ligands in the extra-cellular space.</p>
+<div style="text-align: center;">
+    <img src="/img/lindaplus_toy.jpeg" alt="LINDA+ Toy Example" />
+    <p><em>Figure 2: LINDA+ 3-Cell System Toy Example</em></p>
+</div>
+
+<p>In <strong>Figure 2</strong> we have defined as the significantly regulated TF's those squares that have a thick red border (nodes A14 and A17 for <em>CellA</em>; nodes B13, B14 and B16 for <em>CellB</em>; nodes C13 and C15 for <em>CellC</em>).</p>
+<p>Additionally, we might notice that we have a receptor named 'A1|A2' in <em>CellA</em>. Such an annotation should be used for the cases when a receptor consist of a complex of two or more proteins (in this case A and B). <strong>NOTE:</strong> LINDA+ is able to handle interactions of ligands with protein complex receptors and  receptors that consist of multi-subunit protein complexes (i.e. 2 or more protein units), should be depicted as separated through <code>|</code>.</p>
+<p>The set of DDI/PPI interactions for this toy example, can be loaded by running the following:</p>
+<pre><code class="language-r">library(LINDAPlus)
+
+load(file = system.file(&quot;extdata&quot;, &quot;toy.background.networks.list.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(background.networks.list)
+</code></pre>
+<h3 id="linda-basic-mode-analysis">LINDA+ basic mode analysis</h3>
+<p>For running LINDA+ in it's basic mode, besides the <code>background.networks.list</code> object, we would also need to provide a list of TF enrichment scores for each cell-type as well as define which one of them are to be considered as significantly regulated based on their absolute enrichment score values. More information about how we can obtain TF enrichment score values for each cell-type based on sc/sn-RNAseq data has been provided here (link to real case example when ready).</p>
+<p>The estimated TF activity scores should be provided as a named list (for each cell-type) and which contains data-frames indicating the enrichment scores for each TF at each cell-type like in the object that we load below:</p>
+<pre><code class="language-r">load(file = system.file(&quot;extdata&quot;, &quot;toy.tf.scores.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(tf.scores)
+</code></pre>
+<p>Additionally users can provide a named (also by cell-type) numerical vector to indicate the number of TF’s to consider as significantly regulated based on their absolute enrichment values. In case that this parameter has not been defined, then by default all the TF’s provided in the data-frames list will be considered as significantly regulated.</p>
+<pre><code class="language-r">load(file = system.file(&quot;extdata&quot;, &quot;toy.top.tf.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(top.tf)
+</code></pre>
+<p>This is all that would be needed to run LINDA+ in it's simplest form and we can anchieve this as in the following:</p>
+<pre><code class="language-r">res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
+                    tf.scores = tf.scores,
+                    solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
+                    top.tf = top.tf)
+
+# print(res$combined_solutions)
+# print(res$node_attributes)
+</code></pre>
+<p>The optimization results (as read from the <code>res$combined_solutions</code> output table), has been depicted in the <strong>Figure 3</strong> below.</p>
+<div style="text-align: center;">
+    <img src="/img/lindaplus_toy_ex1.jpeg" alt="LINDA+ Basic Run" />
+    <p><em>Figure 3: LINDA+ 3-Cell System Toy Example - Basic Run. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis.</em></p>
+</div>
+
+<h3 id="linda-with-ligand-scores-analysis">LINDA+ with ligand scores analysis</h3>
+<p>Users can provide information about the abundance of ligands in the extra-cellular space as made evident by Secretomics data through a data-frame object. More abundant ligands/extra-cellular molecules are more likely to initiate conformational changes in receptors. The data-frame provided should contain two columns: ‘ligands’ (providing the ligand ID’s) and ‘score’ (providing the score associated to each ligand, i.e. abundance). The higher the score of the ligand, the more likely it will be for a ligand to appear in the solution. In this case, we penalize the inclusion of ligand L3 in the solution (lower score value given).</p>
+<pre><code class="language-r">## Loading the ligand scores
+load(file = system.file(&quot;extdata&quot;, &quot;toy.ligand.scores.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(ligand.scores)
+
+## Running LINDA+
+res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
+                    tf.scores = tf.scores,
+                    solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
+                    top.tf = top.tf,
+                    ligand.scores = ligand.scores)
+
+# print(res$combined_solutions)
+# print(res$node_attributes)
+</code></pre>
+<p>The optimization result for this case has been depicted in <strong>Figure 4</strong> below.</p>
+<div style="text-align: center;">
+    <img src="/img/lindaplus_toy_ex2.jpeg" alt="LINDA+ Ligand Scores" />
+    <p><em>Figure 4: LINDA+ 3-Cell System Toy Example - Analysis with ligand scores. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis. Ligand 'L3', does not participate anymore in the interaction.</em></p>
+</div>
+
+<h3 id="linda-with-ligand-receptor-scores-analysis">LINDA+ with ligand-receptor scores analysis</h3>
+<p>In the case when Secretomics data is not available, users may still have evidence of functional ligand-receptor interactions. This evidence can come from previous cell-communication analysis based on sc-RNAseq data. In such cases, users can integrate the enrichment scores for ligand-receptor pairs into LINDA+. Doing so helps guide the network inference towards the desired ligand-receptor interactions. In this case users can provide a named list (for each cell-type) of data-frames consisting of ligand-receptor enrichment scores normalized between the values of 0 and 1.</p>
+<pre><code class="language-r">## Loading the ligand-receptor scores
+load(file = system.file(&quot;extdata&quot;, &quot;toy.lr.scores.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(lr.scores)
+
+## Running LINDA+
+res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
+                    tf.scores = tf.scores,
+                    solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
+                    top.tf = top.tf,
+                    lr.scores = lr.scores)
+
+# print(res$combined_solutions)
+# print(res$node_attributes)
+</code></pre>
+<p>In this case, we have assigned a score 0 for the 'L2=A1|A2' interaction. The optimization result for this case has been depicted in <strong>Figure 5</strong> below.</p>
+<div style="text-align: center;">
+    <img src="/img/lindaplus_toy_ex3.jpeg" alt="LINDA+ LR Scores" />
+    <p><em>Figure 5: LINDA+ 3-Cell System Toy Example - Analysis with ligand-receptor scores. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis. Interaction 'L2=A1|A2', does not participate anymore in the solution and the network has been re-wired towards alternative solutions.</em></p>
+</div>
+
+<h3 id="linda-with-cell-cell-communication-scores-analysis">LINDA+ with cell-cell communication scores analysis</h3>
+<p>Users can additionally provide scores (between 0 and 1) representing probability values about how likely would be for two cell-types to directly communicate with each-other (i.e. as made evident through spatial transcriptomics). The higher the score given, the more is likely for a cell-type pair to be directly communicating with each other, and when such score is set to 0, then special constraints will make it so these two cell-types would not be able to directly communicate with each-other. Such scores can be used in our modelling approach where we for example know that specific cell-types are in proximity or distant to each other, thus making the chances of direct communication between them higher or lower. Let’s see how such scores can be provided and integrated into the LINDA+ analysis and what effects it has:</p>
+<pre><code class="language-r">## Loading the cell-cell communication scores
+load(file = system.file(&quot;extdata&quot;, &quot;toy.ccc.scores.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(ccc.scores)
+
+## Running LINDA+
+res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
+                    tf.scores = tf.scores,
+                    solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
+                    top.tf = top.tf,
+                    ccc.scores = ccc.scores)
+
+# print(res$combined_solutions)
+# print(res$node_attributes)
+</code></pre>
+<p>In the <code>ccc.scores</code> object we have assigned a score 0 for 'CellA=CellC'. This can be interpreted that we ask for our model to not allow <em>CellA</em> to talk to <em>CellB</em>. The optimization result for this case has been depicted in <strong>Figure 6</strong> below.</p>
+<div style="text-align: center;">
+    <img src="/img/lindaplus_toy_ex4.jpeg" alt="LINDA+ CCC Scores" />
+    <p><em>Figure 6: LINDA+ 3-Cell System Toy Example - Analysis with cell-cell communication probability scores. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis. Interaction 'A14=L1', does not participate anymore in the solution, meaning that _CellA_ is not communicating to _CellC_ via the release of ligand 'L1'.</em></p>
+</div>
+
+<h3 id="linda-with-alternative-splicing-effects">LINDA+ with alternative splicing effects</h3>
+<p>Given that LINDA+ simultaneously infers not only protein-protein interactions but also domain interactions, it enables us to examine how RNA modification mechanisms, like alternative splicing, might influence the presence or absence of domains within the structure of interacting proteins. This, in turn, allows us to assess the effects of such modifications on the interactions between proteins.</p>
+<p>This is achieved by giving to the network inference function an <code>as.input</code> data-frame object which lists domain ID’s of certain proteins for any cell-type and how they have been affected based on, for example, evidence from differential splicing analyses. These effects can include <em>exclusion</em> (when we know that a domain of a protein has been skipped) or <em>inclusion</em> (when we try to understand how the inclusion of a domain in the network solution might affect the protein interactions).</p>
+<p>In the toy example below it can be demonstrated how the <code>as.input</code> object should be defined.</p>
+<pre><code class="language-r">## Loading the alternative splicing effects objects
+load(file = system.file(&quot;extdata&quot;, &quot;toy.as.input.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(as.input)
+
+## Running LINDA+
+res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
+                    tf.scores = tf.scores,
+                    as.input = as.input,
+                    solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
+                    top.tf = top.tf)
+
+# print(res$combined_solutions)
+# print(res$node_attributes)
+</code></pre>
+<p>In <strong>Figure 7</strong> we can see how the addition of information about included or excluded protein domains affects the re-wiring of the protein interactions.</p>
+<div style="text-align: center;">
+    <img src="/img/lindaplus_toy_ex5.jpeg" alt="LINDA+ AS Effects" />
+    <p><em>Figure 7: LINDA+ 3-Cell System Toy Example - Analysis with alternative-splicing effects. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis. Protein 'A8', does not participate anymore in the solution, since it's iteracting domains have been considered as skipped. Signalling has been rewired towards protein 'A7' and 'A9' instead.</em></p>
+</div>
+
+<h3 id="linda-with-perturbation-effects">LINDA+ with perturbation effects</h3>
+<p>Such feature which allows the users to introduce into the multicellular system effects from i.e. distant ligands or ligands which they themselves experimentally introduce into the system as a perturbation effect. In the case where the user wisshes to add perturbation effects from a specific ligand which does not come from any of the cell-types, LINDA+ automatically introduces into the system an auxilliary <em>PseudoCell</em> which consists of a single 'PSEUDOLIGAND', 'PSEUDORECEPTOR', 'PSEUDOPROTEIN' and 'PSEUDOTF' where the latter is then connected to the ligands that we are introducing in the system. In this case LINDA+ will then infer the interaction mechanisms happening within such PseudoCell and which lead to the secretion of the ligands which the users are are introducing remotely.</p>
+<p>Let’s see how this example works by first loading the background network as well as the TF score objects with the effects from the <em>PseudoCell</em>:</p>
+<pre><code class="language-r">## Loading the background knowledge with the PseudCell cell-type
+load(file = system.file(&quot;extdata&quot;, &quot;toy.background.networks.list.with.perturbations.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(background.networks.list$background.networks$PseudoCell)
+
+## Loading the tf scores where PSEUDOTF of PseudoCell is considered as regulated
+load(file = system.file(&quot;extdata&quot;, &quot;toy.tf.scores.with.perturbations.RData&quot;, package = &quot;LINDAPlus&quot;))
+load(file = system.file(&quot;extdata&quot;, &quot;toy.top.tf.with.perturbations.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(tf.scores$PseudoCell)
+# print(top.tf)
+
+## Running LINDA+
+res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
+                    tf.scores = tf.scores,
+                    solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
+                    top.tf = top.tf)
+
+# print(res$combined_solutions)
+# print(res$node_attributes)
+</code></pre>
+<p>In <strong>Figure 8</strong> we can see how the addition of an external perturbation ligand affects our toy multi-cellular system.</p>
+<div style="text-align: center;">
+    <img src="/img/lindaplus_toy_ex6.jpeg" alt="LINDA+ Perturbation Effects" />
+    <p><em>Figure 8: LINDA+ 3-Cell System Toy Example - Analysis with ligand perturbation effects. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis. Ligand 'L5' perturbs _CellA_ and _CellB_, despite seemingly not being secreted by any of the three cell-types into consideration.</em></p>
+</div>
+
+<h2 id="real-case-application">Real-case application</h2>
+<p>TODO when package available online</p>
               
             </div>
           </div><footer>
