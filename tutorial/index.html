@@ -108,7 +108,7 @@
 <h2 id="toy-example">Toy Example</h2>
 <p>Below are provided the steps of running a small Toy test study which we have depicted in <strong>Figure 2</strong>. In this Toy case-study we are depicting a system of 3 different cell-types (<em>CellA</em>, <em>CellB</em> and <em>CellC</em>) where each node represents a protein (domains not depicted) while edges represent interactions between nodes. Red rhombus represent cell-receptors, blue circles represent intra-cellular proteins, gray squares represent TF’s, while in black circles we are depicting ligands in the extra-cellular space.</p>
 <div style="text-align: center;">
-    <img src="/img/lindaplus_toy.jpeg" alt="LINDA+ Toy Example" />
+    <img src="img/lindaplus_toy.jpeg" alt="LINDA+ Toy Example" />
     <p><em>Figure 2: LINDA+ 3-Cell System Toy Example</em></p>
 </div>
 
@@ -141,7 +141,7 @@ load(file = system.file(&quot;extdata&quot;, &quot;toy.background.networks.list.
 </code></pre>
 <p>The optimization results (as read from the <code>res$combined_solutions</code> output table), has been depicted in the <strong>Figure 3</strong> below.</p>
 <div style="text-align: center;">
-    <img src="/img/lindaplus_toy_ex1.jpeg" alt="LINDA+ Basic Run" />
+    <img src="img/lindaplus_toy_ex1.jpeg" alt="LINDA+ Basic Run" />
     <p><em>Figure 3: LINDA+ 3-Cell System Toy Example - Basic Run. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis.</em></p>
 </div>
 
@@ -163,7 +163,7 @@ res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
 </code></pre>
 <p>The optimization result for this case has been depicted in <strong>Figure 4</strong> below.</p>
 <div style="text-align: center;">
-    <img src="/img/lindaplus_toy_ex2.jpeg" alt="LINDA+ Ligand Scores" />
+    <img src="img/lindaplus_toy_ex2.jpeg" alt="LINDA+ Ligand Scores" />
     <p><em>Figure 4: LINDA+ 3-Cell System Toy Example - Analysis with ligand scores. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis. Ligand 'L3', does not participate anymore in the interaction.</em></p>
 </div>
 
@@ -185,7 +185,7 @@ res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
 </code></pre>
 <p>In this case, we have assigned a score 0 for the 'L2=A1|A2' interaction. The optimization result for this case has been depicted in <strong>Figure 5</strong> below.</p>
 <div style="text-align: center;">
-    <img src="/img/lindaplus_toy_ex3.jpeg" alt="LINDA+ LR Scores" />
+    <img src="img/lindaplus_toy_ex3.jpeg" alt="LINDA+ LR Scores" />
     <p><em>Figure 5: LINDA+ 3-Cell System Toy Example - Analysis with ligand-receptor scores. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis. Interaction 'L2=A1|A2', does not participate anymore in the solution and the network has been re-wired towards alternative solutions.</em></p>
 </div>
 
@@ -207,7 +207,7 @@ res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
 </code></pre>
 <p>In the <code>ccc.scores</code> object we have assigned a score 0 for 'CellA=CellC'. This can be interpreted that we ask for our model to not allow <em>CellA</em> to talk to <em>CellB</em>. The optimization result for this case has been depicted in <strong>Figure 6</strong> below.</p>
 <div style="text-align: center;">
-    <img src="/img/lindaplus_toy_ex4.jpeg" alt="LINDA+ CCC Scores" />
+    <img src="img/lindaplus_toy_ex4.jpeg" alt="LINDA+ CCC Scores" />
     <p><em>Figure 6: LINDA+ 3-Cell System Toy Example - Analysis with cell-cell communication probability scores. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis. Interaction 'A14=L1', does not participate anymore in the solution, meaning that _CellA_ is not communicating to _CellC_ via the release of ligand 'L1'.</em></p>
 </div>
 
@@ -231,7 +231,7 @@ res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
 </code></pre>
 <p>In <strong>Figure 7</strong> we can see how the addition of information about included or excluded protein domains affects the re-wiring of the protein interactions.</p>
 <div style="text-align: center;">
-    <img src="/img/lindaplus_toy_ex5.jpeg" alt="LINDA+ AS Effects" />
+    <img src="img/lindaplus_toy_ex5.jpeg" alt="LINDA+ AS Effects" />
     <p><em>Figure 7: LINDA+ 3-Cell System Toy Example - Analysis with alternative-splicing effects. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis. Protein 'A8', does not participate anymore in the solution, since it's iteracting domains have been considered as skipped. Signalling has been rewired towards protein 'A7' and 'A9' instead.</em></p>
 </div>
 
@@ -259,7 +259,7 @@ res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
 </code></pre>
 <p>In <strong>Figure 8</strong> we can see how the addition of an external perturbation ligand affects our toy multi-cellular system.</p>
 <div style="text-align: center;">
-    <img src="/img/lindaplus_toy_ex6.jpeg" alt="LINDA+ Perturbation Effects" />
+    <img src="img/lindaplus_toy_ex6.jpeg" alt="LINDA+ Perturbation Effects" />
     <p><em>Figure 8: LINDA+ 3-Cell System Toy Example - Analysis with ligand perturbation effects. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis. Ligand 'L5' perturbs _CellA_ and _CellB_, despite seemingly not being secreted by any of the three cell-types into consideration.</em></p>
 </div>
 
