@@ -190,8 +190,15 @@ Not available yet</li>
 <br />
 <div style="margin-top: 5px;"></div></p>
 </li>
+
 <li>
-<p><code>tf.scores</code>: This information should be provided as a named list (for each cell-type) and which contains data-frames indicating the enrichment scores for each TF at each cell-type. The data-frames should contain at least two columns: 'tf' (indicating the TF ID) and the numerical 'score' (indicating the enrichment scores for each TF).</p>
+  <p><code>ccc.input</code>: A data-frame object containing information about how cells communicate with each other. Such information can be obtained by using various methods of cell-cell communication analysis and the data-frame should contain the following columns: <strong>transmitter_cell</strong> (indicating the cell-type which releases the ligands), <strong>receiver_cell</strong> (cell-type which receives the signal), <strong>ligand</strong> (the gene symbol ID of the ligand which has been released by the transmitter), and <strong>receptor</strong> (the gene symbol ID of the receptor that has been perturbed by the ligand in the receiving cell-type).
+  <br />
+  <div style="margin-top: 5px;"></div></p>
+</li>
+
+<li>
+<p><code>tf.input</code>: This information should be provided as a named list (for each cell-type) and which contains data-frames indicating the enrichment scores for each TF at each cell-type. The data-frames should contain at least two columns: 'tf' (indicating the TF ID) and the numerical 'score' (indicating the enrichment scores for each TF).</p>
 </li>
 </ul>
 <div style="margin-top: 10px;"></div>
@@ -213,7 +220,7 @@ Not available yet</li>
 <div style="margin-top: 5px;"></div></p>
 </li>
 <li>
-<p><code>ccc.scores</code>: A data-frame object which should contain two columns: 'ccc' (providing pairs of interacting cell-types, i.e. "CellA=CellB" for the case when <em>CellA</em> communicates with <em>CellB</em>) and 'score' (providing the score associated to each communicating cell pair). The scores should be provided between 0 and 1 and the higher the score a cell-cell interaction, the more likely it will be for the source cell-type to communicate to the target cell-type. A score of 0, means that the defined source cell-type will not talk to the defined target cell-type.
+<p><code>ccc.prob</code>: A data-frame object which should contain two columns: 'ccc' (providing pairs of interacting cell-types, i.e. "CellA=CellB" for the case when <em>CellA</em> communicates with <em>CellB</em>) and 'score' (providing the score associated to each communicating cell pair). The scores should be provided between 0 and 1 and the higher the score a cell-cell interaction, the more likely it will be for the source cell-type to communicate to the target cell-type. A score of 0, means that the defined source cell-type will not talk to the defined target cell-type.
 <br />
 <div style="margin-top: 5px;"></div></p>
 </li>
@@ -233,22 +240,27 @@ Not available yet</li>
 <div style="margin-top: 5px;"></div></p>
 </li>
 <li>
-<p><code>lambda1</code>: A numerical value representing the penalization term of the primary objective of the objective function - TF inclusion. This penalty factor is suggested to be set to a higher value compared to other penalty parameters in order to strongly penalize the inclusion of not signifcantly regulated TF's. By default, <code>lambda1=10</code>.
+<p><code>lambda1</code>: A numerical value representing the penalization term of the first part of the primary objective of the objective functio - Ligand secretion from the transmitter cell. By default, <code>lambda1=10</code>.
 <br />
 <div style="margin-top: 5px;"></div></p>
 </li>
 <li>
-<p><code>lambda2</code>: A numerical value representing the penalization term of the ligands nodes in the network solution. It is only used when <em>ligand.scores</em> data-frame object is provided. In this case, by default (when not specified), <code>lambda2=15</code>.
+<p><code>lambda2</code>: A numerical value representing the penalization term of the second part of the primary objective of the objective function - Ligand-Receptor interaction in the receiver cell. By default <code>lambda2=1</code>.
 <br />
 <div style="margin-top: 5px;"></div></p>
 </li>
 <li>
-<p><code>lambda3</code>: A numerical value representing the penalization term of the ligand-receptor interactions in the network solution. It is only used when <em>lr.scores</em> or <em>ccc.scores</em> or both have been provided. In this case, by default (when not specified), <code>lambda3=1</code>.
+<p><code>lambda3</code>: A numerical value representing the penalization term of the primary objective of the objective function - TF inclusion. This penalty factor is suggested to be set to a higher value compared to other penalty parameters in order to strongly penalize the inclusion of not signifcantly regulated TF's. By default, <code>lambda3=10</code>.
 <br />
 <div style="margin-top: 5px;"></div></p>
 </li>
 <li>
-<p><code>lambda4</code>: A numerical value representing the penalization term of the network components in the solution (proteins and domains). By default, <code>lambda4=0.1</code>.
+<p><code>lambda4</code>: A numerical value representing the penalization term of the a secondary objective of the objective function - Ligand inclusion scores as given in the <em>ligand.scores</em> object. By default, <code>lambda4=5</code>.
+<br />
+<div style="margin-top: 5px;"></div></p>
+</li>
+<li>
+<p><code>lambda5</code>: A numerical value representing the penalization term of the network components in the solution (proteins and domains). By default, <code>lambda4=0.1</code>.
 <br />
 <div style="margin-top: 5px;"></div></p>
 </li>
