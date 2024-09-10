@@ -245,12 +245,12 @@ load(file = system.file(&quot;extdata&quot;, &quot;toy.background.networks.list.
 ## Loading the tf scores where PSEUDOTF of PseudoCell is considered as regulated
 load(file = system.file(&quot;extdata&quot;, &quot;toy.tf.input.with.perturbations.RData&quot;, package = &quot;LINDAPlus&quot;))
 load(file = system.file(&quot;extdata&quot;, &quot;toy.top.tf.with.perturbations.RData&quot;, package = &quot;LINDAPlus&quot;))
-# print(tf.input$PseudoCell)
+# print(tf.scores$PseudoCell)
 # print(top.tf)
 
 ## Running LINDA+
 res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
-                    tf.input = tf.input,
+                    tf.input = tf.scores,
                     solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
                     top.tf = top.tf)
 
