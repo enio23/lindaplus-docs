@@ -143,8 +143,8 @@ load(file = system.file(&quot;extdata&quot;, &quot;toy.background.networks.list.
 
 
 <p>The estimated TF activity scores should be provided as a named list (for each cell-type) and which contains data-frames indicating the enrichment scores for each TF at each cell-type like in the object that we load below:</p>
-<pre><code class="language-r">load(file = system.file(&quot;extdata&quot;, &quot;toy.tf.scores.RData&quot;, package = &quot;LINDAPlus&quot;))
-# print(tf.scores)
+<pre><code class="language-r">load(file = system.file(&quot;extdata&quot;, &quot;toy.tf.input.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(tf.input)
 </code></pre>
 <p>Additionally users can provide a named (also by cell-type) numerical vector to indicate the number of TF’s to consider as significantly regulated based on their absolute enrichment values. In case that this parameter has not been defined, then by default all the TF’s provided in the data-frames list will be considered as significantly regulated.</p>
 <pre><code class="language-r">load(file = system.file(&quot;extdata&quot;, &quot;toy.top.tf.RData&quot;, package = &quot;LINDAPlus&quot;))
@@ -152,7 +152,7 @@ load(file = system.file(&quot;extdata&quot;, &quot;toy.background.networks.list.
 </code></pre>
 <p>This is all that would be needed to run LINDA+ in it's simplest form and we can anchieve this as in the following:</p>
 <pre><code class="language-r">res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
-                    tf.scores = tf.scores,
+                    tf.input = tf.input,
                     solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
                     top.tf = top.tf)
 
@@ -197,7 +197,7 @@ load(file = system.file(&quot;extdata&quot;, &quot;toy.ccc.scores.RData&quot;, p
 
 ## Running LINDA+
 res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
-                    tf.scores = tf.scores,
+                    tf.input = tf.input,
                     solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
                     top.tf = top.tf,
                     ccc.scores = ccc.scores)
@@ -221,7 +221,7 @@ load(file = system.file(&quot;extdata&quot;, &quot;toy.as.input.RData&quot;, pac
 
 ## Running LINDA+
 res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
-                    tf.scores = tf.scores,
+                    tf.input = tf.input,
                     as.input = as.input,
                     solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
                     top.tf = top.tf)
@@ -243,14 +243,14 @@ load(file = system.file(&quot;extdata&quot;, &quot;toy.background.networks.list.
 # print(background.networks.list$background.networks$PseudoCell)
 
 ## Loading the tf scores where PSEUDOTF of PseudoCell is considered as regulated
-load(file = system.file(&quot;extdata&quot;, &quot;toy.tf.scores.with.perturbations.RData&quot;, package = &quot;LINDAPlus&quot;))
+load(file = system.file(&quot;extdata&quot;, &quot;toy.tf.input.with.perturbations.RData&quot;, package = &quot;LINDAPlus&quot;))
 load(file = system.file(&quot;extdata&quot;, &quot;toy.top.tf.with.perturbations.RData&quot;, package = &quot;LINDAPlus&quot;))
-# print(tf.scores$PseudoCell)
+# print(tf.input$PseudoCell)
 # print(top.tf)
 
 ## Running LINDA+
 res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
-                    tf.scores = tf.scores,
+                    tf.input = tf.input,
                     solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
                     top.tf = top.tf)
 
