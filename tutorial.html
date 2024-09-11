@@ -189,28 +189,6 @@ res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
     <p><em>Figure 4: LINDA+ 3-Cell System Toy Example - Analysis with ligand scores. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis. Ligand 'L3', does not participate anymore in the interaction.</em></p>
 </div>
 
-<h3 id="linda-with-cell-cell-communication-scores-analysis">LINDA+ with cell-cell communication scores analysis</h3>
-<p>Users can additionally provide scores (between 0 and 1) representing probability values about how likely would be for two cell-types to directly communicate with each-other (i.e. as made evident through spatial transcriptomics). The higher the score given, the more is likely for a cell-type pair to be directly communicating with each other, and when such score is set to 0, then special constraints will make it so these two cell-types would not be able to directly communicate with each-other. Such scores can be used in our modelling approach where we for example know that specific cell-types are in proximity or distant to each other, thus making the chances of direct communication between them higher or lower. Let’s see how such scores can be provided and integrated into the LINDA+ analysis and what effects it has:</p>
-<pre><code class="language-r">## Loading the cell-cell communication scores
-load(file = system.file(&quot;extdata&quot;, &quot;toy.ccc.scores.RData&quot;, package = &quot;LINDAPlus&quot;))
-# print(ccc.scores)
-
-## Running LINDA+
-res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
-                    tf.input = tf.input,
-                    solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
-                    top.tf = top.tf,
-                    ccc.scores = ccc.scores)
-
-# print(res$combined_solutions)
-# print(res$node_attributes)
-</code></pre>
-<p>In the <code>ccc.scores</code> object we have assigned a score 0 for 'CellA=CellC'. This can be interpreted that we ask for our model to not allow <em>CellA</em> to talk to <em>CellB</em>. The optimization result for this case has been depicted in <strong>Figure 6</strong> below.</p>
-<div style="text-align: center;">
-    <img src="img/lindaplus_toy_ex4.jpeg" alt="LINDA+ CCC Scores" />
-    <p><em>Figure 6: LINDA+ 3-Cell System Toy Example - Analysis with cell-cell communication probability scores. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis. Interaction 'A14=L1', does not participate anymore in the solution, meaning that _CellA_ is not communicating to _CellC_ via the release of ligand 'L1'.</em></p>
-</div>
-
 <h3 id="linda-with-alternative-splicing-effects">LINDA+ with alternative splicing effects</h3>
 <p>Given that LINDA+ simultaneously infers not only protein-protein interactions but also domain interactions, it enables us to examine how RNA modification mechanisms, like alternative splicing, might influence the presence or absence of domains within the structure of interacting proteins. This, in turn, allows us to assess the effects of such modifications on the interactions between proteins.</p>
 <p>This is achieved by giving to the network inference function an <code>as.input</code> data-frame object which lists domain ID’s of certain proteins for any cell-type and how they have been affected based on, for example, evidence from differential splicing analyses. These effects can include <em>exclusion</em> (when we know that a domain of a protein has been skipped) or <em>inclusion</em> (when we try to understand how the inclusion of a domain in the network solution might affect the protein interactions).</p>
