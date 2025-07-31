@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" /><link rel="canonical" href="https://github.com/enio23/lindaplus-docs/index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" />
       <link rel="shortcut icon" href="img/favicon.ico" />
     <title>LINDA+</title>
     <link rel="stylesheet" href="css/theme.css" />
@@ -14,7 +14,7 @@
         // Current page data
         var mkdocs_page_name = "Home";
         var mkdocs_page_input_path = "index.md";
-        var mkdocs_page_url = "/enio23/lindaplus-docs/index.html";
+        var mkdocs_page_url = null;
       </script>
     
     <!--[if lt IE 9]>
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="index.html" class="icon icon-home"> LINDA+
+          <a href="." class="icon icon-home"> LINDA+
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -40,7 +40,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href=".">Home</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#workflow">Workflow</a>
     </li>
@@ -58,19 +58,23 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a>
+                <li class="toctree-l1"><a class="reference internal" href="documentation/">Documentation</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorials</a>
+                <li class="toctree-l1"><a class="reference internal" href="tutorial/">Tutorials</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="download.html">Downloads</a>
+                <li class="toctree-l1"><a class="reference internal" href="ailinda/">ALL-LINDA</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="about.html">About</a>
+                <li class="toctree-l1"><a class="reference internal" href="download/">Downloads</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="about/">About</a>
                 </li>
               </ul>
       </div>
@@ -80,16 +84,15 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">LINDA+</a>
+          <a href=".">LINDA+</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html" class="icon icon-home" aria-label="Docs"></a></li>
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">Home</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/enio23/lindaplus-docs/edit/master/docs/index.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -100,20 +103,26 @@
                 <h1 id="welcome-to-linda">Welcome to LINDA+</h1>
 <p>This is the documentation page of the LINDA+ software.</p>
 <h2 id="workflow">Workflow</h2>
-<p>LINDA+ is a method used to identify intra- and inter-cellular interaction networks at a domain resolution, allowing to further study the effects of Alternative Splicing (AS) on signalling. It is a tool that integrates large-scale knowledge of directed joint interactions (protein-protein and Domain-Domain intra-cellular interactions) as well as structurally resolved ligand-receptor pairs from various resources with estimated transcription factor enzymatic activities based on sc-RNAseq reads (see <strong>Figure 1.</strong>).</p>
-<div style="text-align: center;">
-    <img src="img/lindaplus_pipeline.jpeg" alt="LINDA+ Pipeline" />
-    <p><em>Figure 1: LINDA+ Pipeline</em></p>
-</div>
-
+<p>LINDA+ is a method used to identify intra- and inter-cellular interaction networks at a domain resolution, allowing to further study the effects of Alternative Splicing (AS) on signalling. It is a tool that integrates large-scale knowledge of directed joint interactions (protein-protein and Domain-Domain intra-cellular interactions) as well as structurally resolved ligand-receptor pairs from various resources with estimated ligand-recepor interactions from cell-cell communication analysis and/or transcription factor enzymatic activities based on <strong>sc-RNAseq</strong> reads and/or protein abundances from <strong>scProteomics</strong> (see <strong>Figure 1.</strong>).</p>
+<p><img alt="LINDA+ Pipeline" src="img/lindaplus_pipeline.jpeg" /></p>
+<p><em>Figure 1: LINDA+ Pipeline</em></p>
 <p>At the core of LINDA+ stands an optimization problem, formulated as an Integer Linear Programming (ILP), which allows for joint mechanistic analysis of inter- and intra-cellular protein interaction networks based on scRNAseq data.</p>
 <h2 id="dependencies">Dependencies</h2>
 <h3 id="resources">Resources</h3>
 <p>LINDA+ relies the following resources for performing it's analysis:</p>
 <ul>
-<li><p style="font-weight: bold;">Resources of protein interactions at a domain resolution level:</p> By default, LINDA+ uses <a href="https://academic.oup.com/nar/article/49/D1/D309/5911747">DIGGER</a> as a resource of joint Protein-Protein (PPI) and Domain-Domain (DDI) interactions in human. This allows LINDA+ to mechanistically characterize effects that post-transcriptional processes, such as alternative splicing, might have on protein interaction networks.<br><br></li>
-<li><p style="font-weight: bold;">Resources of ligand-receptor pairs:</p> Several ligand-receptor interaction resources have been integrated in LINDA+, including: <a href="https://www.nature.com/articles/s41467-021-21246-9">CellChat</a>, <a href="https://www.cellphonedb.org/">CellPhoneDB</a>, <a href="https://github.com/ZJUFanLab/CellTalkDB">CellTalkDB</a> and <a href="https://liana-py.readthedocs.io/en/latest/">LIANA</a>. For LINDA+, we have additionally annotated extracellular domains of the receptors, through which the ligands would be able to interact.<br><br></li>
-<li><p style="font-weight: bold;">Resources of transcription factors (TF) to gene relations:</p> LINDA+ additionally relies on known tf-to-gene relations in order to: <strong>i)</strong> Determine significantly regulated TF's based on gene-expression values for each cell-type; and <strong>ii)</strong> Identifying what kinds of ligand genes do these TF's regulate and which can then be secreted into the extra-cellular space. Two types of human tf-to-gene resources have been integrated in LINDA+: <a href="https://saezlab.github.io/dorothea/">DoRothEA</a> and <a href="https://tflink.net/">TfLink</a>.</li>
+<li>
+<p>Resources of protein interactions at a domain resolution level:</p>
+<p>By default, LINDA+ uses <a href="https://exbio.wzw.tum.de/digger/">DIGGERv2</a> (Gold Interactions) as a resource of joint Protein-Protein (PPI) and Domain-Domain (DDI) interactions in human. This allows LINDA+ to mechanistically characterize effects that post-transcriptional processes, such as alternative splicing, might have on protein interaction networks.  </p>
+</li>
+<li>
+<p>Resources of ligand-receptor pairs:</p>
+<p>Several ligand-receptor interaction resources have been integrated in LINDA+, including: <a href="https://github.com/ShellyCoder/cellcall">CellCall</a>, <a href="https://www.cellphonedb.org/">CellPhoneDB</a>, <a href="https://github.com/ZJUFanLab/CellTalkDB">CellTalkDB</a> and <a href="https://liana-py.readthedocs.io/en/latest/">LIANA</a>. For LINDA+, we have additionally annotated extracellular domains of the receptors, through which the ligands would be able to interact.  </p>
+</li>
+<li>
+<p>Resources of transcription factors (TF) to gene relations:</p>
+<p>LINDA+ additionally relies on known tf-to-gene relations in order to: <strong>i)</strong> Determine significantly regulated TF's based on gene-expression values for each cell-type; and <strong>ii)</strong> Identifying what kinds of ligand genes do these TF's regulate and which can then be secreted into the extra-cellular space. Two types of human tf-to-gene resources have been integrated in LINDA+: <a href="https://saezlab.github.io/dorothea/">DoRothEA</a> and <a href="https://tflink.net/">TfLink</a>.</p>
+</li>
 </ul>
 <p>All of the above resources have been integrated in the LINDA+ R-package and details about how combinations of each type of resource can be used for a real-case application of LINDA+ can be found in the Tutorials (hyperlinked once tutorials have been added).</p>
 <p>Users can of course use their own resources of molecular interactions for as long as they are provided in a format recognizable by LINDA+ (see details here (hyperlink to be added later)).</p>
@@ -147,14 +156,13 @@ vignette(&quot;LINDAPlus&quot;)
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="documentation.html" class="btn btn-neutral float-right" title="Documentation">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="documentation/" class="btn btn-neutral float-right" title="Documentation">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <!-- Copyright etc -->
-      <p>Enio Oleg Gjerga</p>
   </div>
 
   Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
@@ -170,13 +178,9 @@ vignette(&quot;LINDAPlus&quot;)
   <div class="rst-versions" role="note" aria-label="Versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     
-        <span>
-          <a href="https://github.com/enio23/lindaplus-docs" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
-        </span>
     
     
-    
-      <span><a href="documentation.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="documentation/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -195,6 +199,6 @@ vignette(&quot;LINDAPlus&quot;)
 </html>
 
 <!--
-MkDocs version : 1.6.0
-Build Date UTC : 2024-08-08 10:31:27.582464+00:00
+MkDocs version : 1.5.3
+Build Date UTC : 2025-07-31 15:28:24.446806+00:00
 -->
