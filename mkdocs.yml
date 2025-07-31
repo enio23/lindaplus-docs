@@ -1,0 +1,12 @@
+site_name: LINDA+
+theme:
+  name: readthedocs
+
+nav:
+  - Home: index.md
+  - Documentation: documentation.md
+  - Tutorials: tutorial.md
+  - ALL-LINDA: ailinda.md
+  - Downloads: download.md
+  - About: about.md
+
