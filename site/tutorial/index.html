@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Tutorials - LINDA+</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Tutorials";
+        var mkdocs_page_input_path = "tutorial.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> LINDA+
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../documentation/">Documentation</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Tutorials</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#toy-example">Toy Example</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#linda-basic-mode-analysis">LINDA+ basic mode analysis</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#linda-basic-model-with-ccc">LINDA+ basic model with CCC</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#linda-basic-mode-with-tf-activities">LINDA+ basic mode with TF activities</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#linda-basic-mode-with-scproteomics">LINDA+ basic mode with scProteomics</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#linda-multi-modal">LINDA+ Multi-Modal</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#linda-with-ligand-scores-analysis">LINDA+ with ligand scores analysis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#linda-with-alternative-splicing-effects">LINDA+ with alternative splicing effects</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#linda-with-perturbation-effects">LINDA+ with perturbation effects</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#real-case-application">Real-case application</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ailinda/">ALL-LINDA</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../download/">Downloads</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">LINDA+</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Tutorials</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="tutorials">Tutorials</h1>
+<p>Here are provided tutorials about how to use LINDA+ R-package in it's basic form as well as all of it's implemented features. We start by first describing the inputs that are to be given for a LINDA+ analysis, followed by tutorial examples of each feature on a small Toy example to then follow with a real-case application.</p>
+<h2 id="toy-example">Toy Example</h2>
+<p>Below are provided the steps of running a small Toy test study which we have depicted in <strong>Figure 2</strong>. In this Toy case-study we are depicting a system of 3 different cell-types (<em>CellA</em>, <em>CellB</em> and <em>CellC</em>) where each node represents a protein (domains not depicted) while edges represent interactions between nodes. Red rhombus represent cell-receptors, blue circles represent intra-cellular proteins, gray squares represent TF’s, while in black circles we are depicting ligands in the extra-cellular space.</p>
+<p><img alt="LINDA+ Toy Example" src="../img/lindaplus_toy.jpeg" /></p>
+<p><em>Figure 2: LINDA+ 3-Cell System Toy Example</em></p>
+<p>In <strong>Figure 2</strong> we have defined as the significantly regulated TF's those squares that have a thick red border (nodes A14 and A17 for <em>CellA</em>; nodes B13, B14 and B16 for <em>CellB</em>; nodes C13 and C15 for <em>CellC</em>).</p>
+<p>Additionally, we might notice that we have a receptor named 'A1|A2' in <em>CellA</em>. Such an annotation should be used for the cases when a receptor consist of a complex of two or more proteins (in this case A and B). <strong>NOTE:</strong> LINDA+ is able to handle interactions of ligands with protein complex receptors and receptors that consist of multi-subunit protein complexes (i.e. 2 or more protein units), should be depicted as separated through <code>|</code>.</p>
+<p>The set of DDI/PPI interactions for this toy example, can be loaded by running the following:</p>
+<pre><code class="language-r">library(LINDAPlus)
+
+load(file = system.file(&quot;extdata&quot;, &quot;toy.background.networks.list.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(background.networks.list)
+</code></pre>
+<h3 id="linda-basic-mode-analysis">LINDA+ basic mode analysis</h3>
+<p>When sc/snRNA-seq data is available, for running LINDA+ in it's basic mode, besides the <code>background.networks.list</code> object, it would also need to either provide a table of ligand-receptor interactions between a transmitter and receiver cell (as made evident by cell-cell communcation analyses) or a list of TF enrichment scores for each cell-type as (as made evident by TF enrichment analyses). For the latter case, we would also need to define which TF's are to be considered as significantly regulated based on their absolute enrichment score values. More information about how we can obtain such inputs from real-case sc/sn-RNAseq data has been provided here (link to real case example when ready).</p>
+<p>Additionally users can rely on scProteomics data to infer network solution, either alone or in combination with scRNA-seq.</p>
+<h4 id="linda-basic-model-with-ccc">LINDA+ basic model with CCC</h4>
+<p>For the first case when we provide cell-communication analysis results as inputs (through the <code>ccc.input</code> object), they should be provided as a data table which contains information about the interacting ligand-receptor pairs as well as transmitter and receiver cells as shown in the object which is loaded in the following way:.</p>
+<pre><code class="language-r">load(file = system.file(&quot;extdata&quot;, &quot;toy.ccc.input.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(ccc.input)
+</code></pre>
+<p>This is all that would be needed to run LINDA+ in it's simplest form by giving cell-communication data as an input and we can anchieve this as in the following:</p>
+<pre><code class="language-r">res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
+                    ccc.input = ccc.input,
+                    solverPath = &quot;/usr/bin/cplex&quot;) #or just change the path to where the cplex executable is located
+</code></pre>
+<p>The optimization results (as read from the <code>res$combined_solutions</code> output table), has been depicted in the <strong>Figure 3a</strong> below.</p>
+<p><img alt="LINDA+ Basic Run" src="../img/all_linda_documentation.005.jpeg" /></p>
+<p><em>Figure 3a: LINDA+ 3-Cell System Toy Example - Basic Run with cell-cell communication scores as input. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis.</em></p>
+<h4 id="linda-basic-mode-with-tf-activities">LINDA+ basic mode with TF activities</h4>
+<p>If only TF activities are preferred, the estimated TF activity scores should be provided as a named list (for each cell-type) and which contains data-frames indicating the enrichment scores for each TF at each cell-type like in the object that we load below:</p>
+<pre><code class="language-r">load(file = system.file(&quot;extdata&quot;, &quot;toy.tf.input.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(tf.input)
+</code></pre>
+<p>Additionally users can provide a named (also by cell-type) numerical vector to indicate the number of TF’s to consider as significantly regulated based on their absolute enrichment values. In case that this parameter has not been defined, then by default all the TF’s provided in the data-frames list will be considered as significantly regulated.</p>
+<pre><code class="language-r">load(file = system.file(&quot;extdata&quot;, &quot;toy.top.tf.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(top.tf)
+</code></pre>
+<p>This is all that would be needed to run LINDA+ in it's simplest form and we can anchieve this as in the following:</p>
+<pre><code class="language-r">res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
+                    tf.input = tf.input,
+                    solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
+                    top.tf = top.tf)
+
+# print(res$combined_solutions)
+# print(res$node_attributes)
+</code></pre>
+<p>The optimization results (as read from the <code>res$combined_solutions</code> output table), has been depicted in the <strong>Figure 3b</strong> below.</p>
+<p><img alt="LINDA+ Basic Run" src="../img/all_linda_documentation.006.jpeg" /></p>
+<p><em>Figure 3b: LINDA+ 3-Cell System Toy Example - Basic Run with TF activity scores provided as inputs. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis.</em></p>
+<h4 id="linda-basic-mode-with-scproteomics">LINDA+ basic mode with scProteomics</h4>
+<p>Besides scRNA-seq, users can also rely on scProteomics data to infer network solutions. In this case, thy would need to provide a <code>prot.input</code> data-frame indicating proteins which would be preferred to be included in the solution for any given cell-type.</p>
+<p>The <code>prot.input</code> object should have a structure like following:</p>
+<pre><code class="language-r">load(file = system.file(&quot;extdata&quot;, &quot;toy.prot.input.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(prot.input)
+</code></pre>
+<p>The analysis can then run as follows:</p>
+<pre><code class="language-r">res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
+                    prot.input = prot.input,
+                    solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
+                    )
+
+# print(res$combined_solutions)
+# print(res$node_attributes)
+</code></pre>
+<p><img alt="LINDA+ Basic Run" src="../img/all_linda_documentation.007.jpeg" /></p>
+<p><em>Figure 3c: LINDA+ 3-Cell System Toy Example - Basic Run with protein activity scores provided as inputs. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis.</em></p>
+<h3 id="linda-multi-modal">LINDA+ Multi-Modal</h3>
+<p>Users can optionally also chose to provide multiple types of inputs (<code>ccc.input</code>, <code>tf.input</code>, <code>prot.input</code>) at the same time and thus giving information about events in both the intra-cellular and extra-cellular space for inferring networks of protein interactions.</p>
+<p>The example below depicts how we can use both <code>ccc.input</code> and <code>tf.input</code> which we can obtain from scRNA-seq analysis:</p>
+<pre><code class="language-r">res &lt;- runLINDAPlus(background.networks.list = background.networks.list, 
+                    ccc.input = ccc.input, 
+                    tf.input = tf.input, 
+                    top.tf = top.tf,
+                    solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
+                    )
+
+# print(res$combined_solutions)
+# print(res$node_attributes)
+</code></pre>
+<p><img alt="LINDA+ Basic Run" src="../img/all_linda_documentation.008.jpeg" /></p>
+<p><em>Figure 4: LINDA+ 3-Cell System Toy Example - Integrated Run with CCC and TF activities provided as inputs. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis.</em></p>
+<h3 id="linda-with-ligand-scores-analysis">LINDA+ with ligand scores analysis</h3>
+<p>Users can provide information about the abundance of ligands in the extra-cellular space as made evident by Secretomics data through a data-frame object. More abundant ligands/extra-cellular molecules are more likely to initiate conformational changes in receptors. The data-frame provided should contain two columns: ‘ligands’ (providing the ligand ID’s) and ‘score’ (providing the score associated to each ligand, i.e. abundance). The higher the score of the ligand, the more likely it will be for a ligand to appear in the solution. In this case, we penalize the inclusion of ligand L3 in the solution (lower score value given) and we provide the <code>ccc.input</code> as the other mandatory input in the analysis.
+Of course the secretomics information should also be complemented with at least one of the mandatory inputs (<code>ccc.input</code>, <code>tf.input</code>, <code>prot.input</code>). Below we show a Toy example for the case when <code>ccc.input</code> is provided.</p>
+<pre><code class="language-r">## Loading the ligand scores
+load(file = system.file(&quot;extdata&quot;, &quot;toy.ligand.scores.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(ligand.scores)
+
+## Running LINDA+
+res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
+                    ccc.input = ccc.input,
+                    solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
+                    ligand.scores = ligand.scores,
+                    lambda1 = 5, lambda2 = 1, lambda4 = 20)
+
+# print(res$combined_solutions)
+# print(res$node_attributes)
+</code></pre>
+<p>The optimization result for this case has been depicted in <strong>Figure 5</strong> below.</p>
+<p><img alt="LINDA+ Ligand Scores" src="../img/lindaplus_toy_ex2.jpeg" /></p>
+<p><em>Figure 5: LINDA+ 3-Cell System Toy Example - Analysis with ligand scores. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis. Ligand 'L3', does not participate anymore in the interaction.</em></p>
+<h3 id="linda-with-alternative-splicing-effects">LINDA+ with alternative splicing effects</h3>
+<p>Given that LINDA+ simultaneously infers not only protein-protein interactions but also domain interactions, it enables us to examine how RNA modification mechanisms, like alternative splicing, might influence the presence or absence of domains within the structure of interacting proteins. This, in turn, allows us to assess the effects of such modifications on the interactions between proteins.</p>
+<p>This is achieved by giving to the network inference function an <code>as.input</code> data-frame object which lists domain ID’s of certain proteins for any cell-type and how they have been affected based on, for example, evidence from differential splicing analyses. These effects can include <em>exclusion</em> (when we know that a domain of a protein has been skipped) or <em>inclusion</em> (when we try to understand how the inclusion of a domain in the network solution might affect the protein interactions).</p>
+<p>In the toy example below it can be demonstrated how the <code>as.input</code> object should be defined.</p>
+<pre><code class="language-r">## Loading the alternative splicing effects objects
+load(file = system.file(&quot;extdata&quot;, &quot;toy.as.input.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(as.input)
+
+## Running LINDA+
+res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
+                    tf.input = tf.input,
+                    as.input = as.input,
+                    solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
+                    top.tf = top.tf)
+
+# print(res$combined_solutions)
+# print(res$node_attributes)
+</code></pre>
+<p>In <strong>Figure 6</strong> we can see how the addition of information about included or excluded protein domains affects the re-wiring of the protein interactions.</p>
+<p><img alt="LINDA+ AS Effects" src="../img/lindaplus_toy_ex5.jpeg" /></p>
+<p><em>Figure 6: LINDA+ 3-Cell System Toy Example - Analysis with alternative-splicing effects. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis. Protein 'A8', does not participate anymore in the solution, since it's iteracting domains have been considered as skipped. Signalling has been rewired towards protein 'A7' and 'A9' instead.</em></p>
+<h3 id="linda-with-perturbation-effects">LINDA+ with perturbation effects</h3>
+<p>Such feature which allows the users to introduce into the multicellular system effects from i.e. distant ligands or ligands which they themselves experimentally introduce into the system as a perturbation effect. In the case where the user wisshes to add perturbation effects from a specific ligand which does not come from any of the cell-types, LINDA+ automatically introduces into the system an auxilliary <em>PseudoCell</em> which consists of a single 'PSEUDOLIGAND', 'PSEUDORECEPTOR', 'PSEUDOPROTEIN' and 'PSEUDOTF' where the latter is then connected to the ligands that we are introducing in the system. In this case LINDA+ will then infer the interaction mechanisms happening within such PseudoCell and which lead to the secretion of the ligands which the users are are introducing remotely.</p>
+<p>Let’s see how this example works by first loading the background network as well as the TF score objects with the effects from the <em>PseudoCell</em>:</p>
+<pre><code class="language-r">## Loading the background knowledge with the PseudCell cell-type
+load(file = system.file(&quot;extdata&quot;, &quot;toy.background.networks.list.with.perturbations.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(background.networks.list$background.networks$PseudoCell)
+
+## Loading the tf scores where PSEUDOTF of PseudoCell is considered as regulated
+load(file = system.file(&quot;extdata&quot;, &quot;toy.tf.input.with.perturbations.RData&quot;, package = &quot;LINDAPlus&quot;))
+load(file = system.file(&quot;extdata&quot;, &quot;toy.top.tf.with.perturbations.RData&quot;, package = &quot;LINDAPlus&quot;))
+# print(tf.scores$PseudoCell)
+# print(top.tf)
+
+## Running LINDA+
+res &lt;- runLINDAPlus(background.networks.list = background.networks.list,
+                    tf.input = tf.scores,
+                    solverPath = &quot;/usr/bin/cplex&quot;, #or just change the path to where the cplex executable is located
+                    top.tf = top.tf)
+
+# print(res$combined_solutions)
+# print(res$node_attributes)
+</code></pre>
+<p>In <strong>Figure 7</strong> we can see how the addition of an external perturbation ligand affects our toy multi-cellular system.</p>
+<p><img alt="LINDA+ Perturbation Effects" src="../img/lindaplus_toy_ex6.jpeg" /></p>
+<p><em>Figure 7: LINDA+ 3-Cell System Toy Example - Analysis with ligand perturbation effects. In bold are highlighted the interactions and nodes that have been inferred as functional/regulated in our network analysis. Ligand 'L5' perturbs _CellA_ and _CellB_, despite seemingly not being secreted by any of the three cell-types into consideration.</em></p>
+<h2 id="real-case-application">Real-case application</h2>
+<p>TODO</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../documentation/" class="btn btn-neutral float-left" title="Documentation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ailinda/" class="btn btn-neutral float-right" title="ALL-LINDA">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../documentation/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ailinda/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
