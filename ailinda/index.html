@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>ALL-LINDA - LINDA+</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "ALL-LINDA";
+        var mkdocs_page_input_path = "ailinda.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> LINDA+
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../documentation/">Documentation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../tutorial/">Tutorials</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">ALL-LINDA</a>
+    <ul class="current">
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../download/">Downloads</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">LINDA+</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">ALL-LINDA</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="all-linda">ALL-LINDA</h1>
+<p>Despite the unique ability to jointly model protein interaction networks on multi-cellular 
+systems while at the same time to also account for the addition/removal of protein domains, 
+the LINDA framework currently has some limitations. First, LINDA relies on established 
+PPI/DDI and TF-Gene relation resources, which are typically incomplete and are not 
+continuously updated. Additionally, these resources are heavily biased toward certain 
+overrepresented medical conditions, particularly cancer, which makes their application 
+in other medical contexts challenging. Moreover, the LINDA methodology has limitations 
+in capturing the full dynamic effects of AS on protein interactions. Specifically LINDA, 
+can only model one type of AS effects, namely exon-skipping, while other types remain 
+unaccounted for. In addition to that, we can only model the effects of complete exon 
+skipping or inclusion, resulting in the full addition or removal of protein domains, 
+while partial splicing effects remain unconsidered. Finally, to better pinpoint the 
+most likely signalling mechanisms from sequencing data, the LINDA framework would 
+benefit from improved identifiability, as the current approach often produces for 
+the same context or condition several equally plausible explanations of signalling 
+mechanisms and how they are affected by splicing. </p>
+<p>To address these challenges, we propose enhancing the current LINDA framework with 
+Artificial Intelligence (AI), incorporating Large Language Models (LLMs) and AlphaFold3 (AF3) 
+into an integrated framework called ALL-LINDA (<strong>Figure 8</strong>). More specifically, LLMs will be employed 
+to mine the vast scientific literature, ensuring continuously updated knowledge of molecular 
+interactions across pre-selected biological domains. Additionally, AlphaFold will be 
+used to computationally validate protein interactions based on their folding structures 
+and thermodynamic properties, thus ensuring a more accurate representation of 
+molecular interactions. Molecular Dynamics (MD) simulations will also be performed 
+following AlphaFold modelling to identify and account for thermodynamically more plausible 
+interactions, thus alleviating some of the mentioned identifiability issues.</p>
+<p><img alt="ALL-LINDA" src="../img/all_linda_documentation.011.jpeg" />
+<em>Figure 8: ALL-LINDA Workflow depicted thrrough Work-Packages</em></p>
+<p><strong>This is work in progress and documentation on this project will be provided shortly.</strong></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../tutorial/" class="btn btn-neutral float-left" title="Tutorials"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../download/" class="btn btn-neutral float-right" title="Downloads">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../tutorial/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../download/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
